@@ -1,7 +1,7 @@
 var count = 0;
 var currentSong = new Audio();
 var start = true;
- 
+
 async function fetchSongs() {
     let fetchSong = await fetch("/songs");
     let response = await fetchSong.text();
@@ -19,35 +19,47 @@ async function fetchSongs() {
 }
 
 async function playsong() {
-    var songtime = document.querySelector(".songtime");
     var songSlider = document.getElementById("songSlider");
     var nextbtn = document.getElementById("next");
     var prevbtn = document.getElementById("prev");
     let songs = await fetchSongs()
     var playPausebtn = document.getElementById("playPause");
-    var songdiv=document.querySelector(".songList").getElementsByTagName("ol")[0];
-    for(const song of songs){
-        var ganna=song.split("/songs/")[1];
-        songdiv.innerHTML=songdiv.innerHTML+`<li>${ganna.replaceAll("%20"," ")}</li>`;
+    var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
+    for (const song of songs) {
+        var ganna = song.split("/songs/")[1];
+        songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
     }
-    var lasttrack=songs.length-1;
-    
-    currentSong.src=songs[count];
+    var lasttrack = songs.length - 1;
+
+    currentSong.src = songs[count];
     playPausebtn.addEventListener("click", () => {
-        start = playing(start,currentSong,playPausebtn);
+        start = playing(start, currentSong, playPausebtn);
     });
-    
+
     nextbtn.addEventListener("click", () => {
-        const res=nexttrack(count, start, songs,playPausebtn,lasttrack);
-        start= res.start;
-        count= res.count;
+        const res = nexttrack(count, start, songs, playPausebtn, lasttrack);
+        start = res.start;
+        count = res.count;
     });
     prevbtn.addEventListener("click", () => {
-        const res=prevtrack(count, start, songs,playPausebtn,lasttrack);
-        start= res.start;
-        count= res.count;
+        const res = prevtrack(count, start, songs, playPausebtn, lasttrack);
+        start = res.start;
+        count = res.count;
     });
-    
+
+    //library
+
+    var songitems = document.querySelectorAll(".songitem")
+    songitems.forEach((songitem, index) => {
+        index++;
+        songitem.addEventListener("click", () => {
+            currentSong.src = songs[index - 1];
+            start = true;
+            start = playing(start, currentSong, playPausebtn);
+        });
+    });
+
+    document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
 
     currentSong.addEventListener("timeupdate", () => {
         let currentDuration = currentSong.currentTime;
@@ -56,12 +68,15 @@ async function playsong() {
         songSlider.value = percentagePlayed;
         let minutesPlayed = Math.floor(currentDuration / 60);
         let secondsPlayed = Math.floor(currentDuration % 60);
-        songtime.innerHTML = formatTime(minutesPlayed, secondsPlayed);
+        let totalMinutes = Math.floor(totalDuration / 60);
+        let totalSeconds = Math.floor(totalDuration % 60);
+        document.querySelector(".playedTime").innerHTML = formatTime(minutesPlayed, secondsPlayed);
+        document.querySelector(".totalTime").innerHTML = formatTime(totalMinutes,totalSeconds);
 
-        if(currentDuration==totalDuration){
-            const res=nexttrack(count, start, songs,playPausebtn,lasttrack);
-            start= res.start;
-            count= res.count;
+        if (currentDuration == totalDuration) {
+            const res = nexttrack(count, start, songs, playPausebtn, lasttrack);
+            start = res.start;
+            count = res.count;
         }
     });
     songSlider.addEventListener("input", () => {
@@ -77,7 +92,7 @@ function formatTime(minutes, seconds) {
 
 playsong()
 
-function playing(start,currentSong,playPausebtn){
+function playing(start, currentSong, playPausebtn) {
     if (start) {
         currentSong.play();
         playPausebtn.src = ("./svg/pause-button.svg");
@@ -92,32 +107,34 @@ function playing(start,currentSong,playPausebtn){
 }
 
 
-function nexttrack(count, start, songs,playPausebtn,lasttrack){
-    if(count==lasttrack){
-        count=0;
-    }else{
+function nexttrack(count, start, songs, playPausebtn, lasttrack) {
+    if (count == lasttrack) {
+        count = 0;
+    } else {
         count++;
     }
-    currentSong.src=songs[count];
+    currentSong.src = songs[count];
     currentSong.addEventListener("loadeddata", () => {
+        document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
         currentSong.play();
         playPausebtn.src = ("./svg/pause-button.svg");
     });
     start = false;
-    return {count,start};
+    return { count, start };
 }
 
-function prevtrack(count, start, songs,playPausebtn,lasttrack){
-    if(count==0){
-        count=lasttrack;
-    }else{
+function prevtrack(count, start, songs, playPausebtn, lasttrack) {
+    if (count == 0) {
+        count = lasttrack;
+    } else {
         count--;
     }
-    currentSong.src=songs[count];
+    currentSong.src = songs[count];
     currentSong.addEventListener("loadeddata", () => {
+        document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
         currentSong.play();
         playPausebtn.src = ("./svg/pause-button.svg");
     });
     start = false;
-    return {count,start};
+    return { count, start };
 }

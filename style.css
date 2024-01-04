@@ -60,6 +60,28 @@ body {
     width: 20px;
 }
 
+.songList ol li{
+    list-style-type: none;
+    height: 30px;
+    overflow-y: hidden;
+    font-size: 15px;
+    margin-top: 10px;
+    border: 1px solid rgb(245, 228, 225);
+    border-radius: 5px;
+    padding: 8px;
+}
+.songList{
+    padding: 5px;
+    height: 400px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px -1px white; 
+}
+.songList::-webkit-scrollbar-thumb {
+    background: rgb(178, 175, 175);
+    border-radius: 10px;    
+}
+
 .footer a {
     text-decoration: none;
     color: grey;
@@ -74,6 +96,8 @@ body {
     gap: 10px;
     font-size: 13px;
 }
+
+/*=================== RIGHT=============== */
 
 .right>* {
     padding: 10px;
@@ -134,11 +158,16 @@ body {
 
 .cardContainer {
     margin-top: 10px;
+    padding: 10px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     height: 60vh;
-    overflow-y: visible;
+    height: 60vh;
+    overflow-y: scroll;
+    border-radius: 5px;
+    box-shadow: inset 10px 0 10px -1px rgba(167, 164, 164, 0.126); 
+
 }
 
 .card {
@@ -184,25 +213,24 @@ body {
 
 .playbar {
     position: fixed;
-    bottom: 0;
-    width: 64vw;
-    height: 90px;
+    bottom: 10px;
+    width: 70vw;
+    height: 70px;
     background-color: rgb(1, 23, 23);
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    padding: 12px;
+    border-radius: 10px;
+    padding: 12px 0px;
     text-align: center;
 }
 
 .songButton img {
     margin-left: 20px;
-    width: 35px;
+    width: 30px;
     cursor: pointer;
 }
 
 .songSlider {
     -webkit-appearance: none;
-    width: 50%;
+    width: 90%;
     height: 1px;
     background: #d3d3d3;
 }
@@ -216,9 +244,21 @@ body {
     cursor: pointer;
   }
 
-.songList ol li{
-    margin-top: 10px;
+
+.songbar{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    font-size: 14px;
 }
-.songList{
-    padding-left: 20px;
+.songbar .songinfo{
+    padding-left: 10px;
+    text-align: left;
+}
+.songtime{
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
+}
+.songtime .slash{
+    margin: 0px 5px;
 }
