@@ -3,7 +3,7 @@ var currentSong = new Audio();
 var start = true;
 
 async function fetchSongs() {
-    let fetchSong = await fetch("https://github.com/sanjeet145/songplayer/blob/main/songs");
+    let fetchSong = await fetch("https://github.com/sanjeet145/songplayer/blob/main/songs/");
     let response = await fetchSong.text();
     let div = document.createElement('div');
     div.innerHTML = response;
