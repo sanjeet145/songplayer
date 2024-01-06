@@ -24,7 +24,7 @@ async function playsong() {
     var songSlider = document.getElementById("songSlider");
     var nextbtn = document.getElementById("next");
     var prevbtn = document.getElementById("prev");
-    let songs = await fetchSongs()
+    // let songs = await fetchSongs()
     var playPausebtn = document.getElementById("playPause");
     var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
     for (const song of songs) {
