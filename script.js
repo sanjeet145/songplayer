@@ -29,7 +29,7 @@ async function playsong() {
     var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
     for (const song of songs) {
         var ganna = song.split("/songs/")[1];
-        songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
+        // songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
     }
     var lasttrack = songs.length - 1;
 
