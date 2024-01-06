@@ -2,21 +2,23 @@ var count = 0;
 var currentSong = new Audio();
 var start = true;
 
-async function fetchSongs() {
-    let fetchSong = await fetch("https://github.com/sanjeet145/songplayer/blob/main/songs/");
-    let response = await fetchSong.text();
-    let div = document.createElement('div');
-    div.innerHTML = response;
-    let a = div.getElementsByTagName("a");
-    let songs = [];
-    for (let index = 0; index < a.length; index++) {
-        const element = a[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href);
-        }
-    }
-    return songs;
-}
+// async function fetchSongs() {
+//     let fetchSong = await fetch("/songs");
+//     let response = await fetchSong.text();
+//     let div = document.createElement('div');
+//     div.innerHTML = response;
+//     let a = div.getElementsByTagName("a");
+//     let songs = [];
+//     for (let index = 0; index < a.length; index++) {
+//         const element = a[index];
+//         if (element.href.endsWith(".mp3")) {
+//             songs.push(element.href);
+//         }
+//     }
+//     return songs;
+// }
+
+const songs =["songs/High Hukku - King.mp3","songs/Hua Main Animal 128 Kbps.mp3","songs/Khalasi.mp3","songs/Ishq Jaisa Kuch Fighter 128 Kbps.mp3","songs/Matak Chalungi.mp3"];
 
 async function playsong() {
     var songSlider = document.getElementById("songSlider");
