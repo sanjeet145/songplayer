@@ -31,6 +31,8 @@ async function playsong() {
     var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
     for (const song of songs) {
         var ganna = song.split("/songs/")[1];
+        songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna}</li>`;
+
         // songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
     }
     var lasttrack = songs.length - 1;
@@ -135,24 +137,10 @@ function prevtrack(count, start, songs, playPausebtn, lasttrack) {
     }
     currentSong.src = songs[count];
     currentSong.addEventListener("loadeddata", () => {
-        document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
+        // document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
         currentSong.play();
         playPausebtn.src = ("./svg/pause-button.svg");
     });
     start = false;
     return { count, start };
 }
-
-
-document.querySelector(".small-open").addEventListener("click", () => {
-    document.querySelector(".left").style.left="0px";
-});
-document.querySelector(".close-small").addEventListener("click", () => {
-    document.querySelector(".left").style.left="-100%";
-});
-
-
-document.querySelector(".login").addEventListener("click",() => {
-    prompt("Enter your Username","Username");
-    prompt("Enter your Password","Password");
-})
