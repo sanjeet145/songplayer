@@ -10,10 +10,12 @@
     <link rel="shortcut icon" href="https://open.spotifycdn.com/cdn/images/favicon.0f31d2ea.ico" type="image/x-icon">
 </head>
 
-<body>
+<body onload="preloaderFun()">
+    <div id="preloader"></div>
     <div class="container flex">
         <div class="left p5">
             <div class="home rounded bg-grey">
+                <img class="close-small" src="./svg/close-small.svg" alt="">
                 <img src="./svg/logo.svg" alt="logo">
                 <ul>
                     <li><img src="./svg/home.svg" alt="home">Home</li>
@@ -65,10 +67,13 @@
         </div>
         <div class="right rounded m5 bg-grey">
             <div class="header p10 ">
-                <div class="nav">
+                <div class="small-open">
+                    <img src="./svg/small-button.svg" alt="">
+                </div>
+                <!-- <div class="nav">
                     <img src="./svg/lessthan.svg" alt="previous">
                     <img src="./svg/greaterthan.svg" alt="next">
-                </div>
+                </div> -->
                 <div class="buttons">
                     <button class="button signup">Sign up</button>
                     <button class="button login">Log in</button>
@@ -90,8 +95,7 @@
                 </div>
                 <div class="playbar">
                     <div class="songbar">
-                        <!-- <div class="songinfo"></div> -->
-                        <marquee behavior="scroll" scrollamount="2" direction="left" class="songinfo"></marquee>
+                        <marquee behavior="scroll" scrollamount="2" direction="left " class="songinfo"></marquee>
                         <div class="songButton">
                             <img id="prev" src="./svg/prev-button.svg" alt="previous">
                             <img id="playPause" src="./svg/play-button.svg" alt="play">

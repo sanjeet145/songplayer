@@ -3,6 +3,17 @@
     padding: 0;
 }
 
+#preloader{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #181818 url('./img/preloader2.gif') no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 99;
+}
+
+
 ::-webkit-scrollbar {
     width: 2px;
 }
@@ -114,7 +125,7 @@ body {
     background-color: rgba(18, 18, 18, 0.849);
     height: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
@@ -144,6 +155,20 @@ body {
     font-weight: bold;
     font-size: 15px;
     color: white;
+}
+
+.small-open{
+    cursor: pointer;
+    display: none;
+    text-align: end;
+    width: 100%;
+}
+.close-small{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: none;
 }
 
 .spotifyplaylist {
@@ -262,3 +287,24 @@ body {
 .songtime .slash{
     margin: 0px 5px;
 }
+
+@media (max-width:840px){
+    .signup,.login{
+        display: none;
+    }
+    .small-open,.close-small{
+    display: block;
+    }
+    .left{
+        position: absolute;
+        left: -100%;
+        z-index: 1;
+        backdrop-filter: blur(10px);
+        transition: all 0.5s;
+        width: 50vw;
+    }
+    .right{
+        width: 100vw;
+    }
+}
+

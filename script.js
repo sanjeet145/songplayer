@@ -1,33 +1,37 @@
+window.onload(document.getElementById("preloader").style.display="none");
+
 var count = 0;
 var currentSong = new Audio();
 var start = true;
 
-async function fetchSongs() {
-    let fetchSong = await fetch("/songs");
-    let response = await fetchSong.text();
-    let div = document.createElement('div');
-    div.innerHTML = response;
-    let a = div.getElementsByTagName("a");
-    let songs = [];
-    for (let index = 0; index < a.length; index++) {
-        const element = a[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href);
-        }
-    }
-    return songs;
-}
+// async function fetchSongs() {
+//     let fetchSong = await fetch("/songs");
+//     let response = await fetchSong.text();
+//     let div = document.createElement('div');
+//     div.innerHTML = response;
+//     let a = div.getElementsByTagName("a");
+//     let songs = [];
+//     for (let index = 0; index < a.length; index++) {
+//         const element = a[index];
+//         if (element.href.endsWith(".mp3")) {
+//             songs.push(element.href);
+//         }
+//     }
+//     return songs;
+// }
+
+const songs =["songs/High Hukku - King.mp3","songs/Hua Main Animal 128 Kbps.mp3","songs/Khalasi.mp3","songs/Ishq Jaisa Kuch Fighter 128 Kbps.mp3","songs/Matak Chalungi.mp3"];
 
 async function playsong() {
     var songSlider = document.getElementById("songSlider");
     var nextbtn = document.getElementById("next");
     var prevbtn = document.getElementById("prev");
-    let songs = await fetchSongs()
+    // let songs = await fetchSongs()
     var playPausebtn = document.getElementById("playPause");
     var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
     for (const song of songs) {
         var ganna = song.split("/songs/")[1];
-        songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
+        // songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
     }
     var lasttrack = songs.length - 1;
 
@@ -59,7 +63,7 @@ async function playsong() {
         });
     });
 
-    document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
+    // document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
 
     currentSong.addEventListener("timeupdate", () => {
         let currentDuration = currentSong.currentTime;
@@ -115,7 +119,7 @@ function nexttrack(count, start, songs, playPausebtn, lasttrack) {
     }
     currentSong.src = songs[count];
     currentSong.addEventListener("loadeddata", () => {
-        document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
+        // document.querySelector(".songinfo").innerHTML = decodeURI(songs[count].split("/songs/")[1].split(".mp3")[0]);
         currentSong.play();
         playPausebtn.src = ("./svg/pause-button.svg");
     });
@@ -138,3 +142,17 @@ function prevtrack(count, start, songs, playPausebtn, lasttrack) {
     start = false;
     return { count, start };
 }
+
+
+document.querySelector(".small-open").addEventListener("click", () => {
+    document.querySelector(".left").style.left="0px";
+});
+document.querySelector(".close-small").addEventListener("click", () => {
+    document.querySelector(".left").style.left="-100%";
+});
+
+
+document.querySelector(".login").addEventListener("click",() => {
+    prompt("Enter your Username","Username");
+    prompt("Enter your Password","Password");
+})
