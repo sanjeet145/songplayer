@@ -20,7 +20,7 @@ var start = true;
 //     return songs;
 // }
 
-const songs =["songs/High Hukku - King.mp3","songs/Hua Main Animal 128 Kbps.mp3","songs/Khalasi.mp3","songs/Ishq Jaisa Kuch Fighter 128 Kbps.mp3","songs/Matak Chalungi.mp3"];
+const songs =["songs/High Hukku - King.mp3","songs/Hua Main Animal 128 Kbps.mp3","songs/Khalasi.mp3","songs/Ishq Jaisa Kuch Fighter 128 Kbps.mp3","songs/Matak Chalungi.mp3","songs/Lutt Putt Gaya Dunki 128 Kbps.mp3","songs/Kabhi Shaam Dhale - Mohammad Faiz.mp3","songs/Thumak Thumak Pahari.mp3"];
 
 async function playsong() {
     var songSlider = document.getElementById("songSlider");
@@ -30,7 +30,7 @@ async function playsong() {
     var playPausebtn = document.getElementById("playPause");
     var songdiv = document.querySelector(".songList").getElementsByTagName("ol")[0];
     for (const song of songs) {
-        var ganna = song.split("/songs/")[1];
+        var ganna = song.split("songs/")[1];
         songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna}</li>`;
 
         // songdiv.innerHTML = songdiv.innerHTML + `<li class="songitem">${ganna.replaceAll("%20", " ")}</li>`;
@@ -144,3 +144,10 @@ function prevtrack(count, start, songs, playPausebtn, lasttrack) {
     start = false;
     return { count, start };
 }
+
+document.querySelector(".small-open").getElementsByTagName("img")[0].addEventListener(("click"),()=>{
+    document.querySelector(".left").style.left="0";
+});
+document.querySelector(".close-small").addEventListener(("click"),()=>{
+    document.querySelector(".left").style.left="-100%";
+});
