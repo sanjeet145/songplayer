@@ -1,5 +1,9 @@
-window.onload=document.getElementById("preloader").style.display="none"
-
+function closepre(){
+    setTimeout(myfun,1000);
+}
+function myfun(){
+    document.getElementById("preloader").style.display="none";
+}
 var count = 0;
 var currentSong = new Audio();
 var start = true;
