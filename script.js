@@ -1,4 +1,4 @@
-window.onload(document.getElementById("preloader").style.display="none");
+window.onload=document.getElementById("preloader").style.display="none"
 
 var count = 0;
 var currentSong = new Audio();
